@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta property="fb:app_id" content="245282579250541"/>
+            <meta property="og:type" content="article"/>
+                <meta property="og:title" content="RoomPlaza"/>
+                <meta property="og:image" content="https://www.roomplaza.com/Modules/Web/Images/logo.svg"/>
+                <meta property="og:url" content="https://www.roomplaza.com/en/html/web/search/home?city=4&startDate=2024-04-01&tenants=1"/>
+
+    <link rel="shortcut icon" type="image/svg" href="/Modules/Web/Images/logo.ico"/>
+    <title>RoomPlaza</title>
+    <link rel="stylesheet" href="/Modules/Web/Css/screen.css">
+
+
+
+</head>
+<body class="loading">
+<div class="loader">
+    <div class="center">
+        <img src="/Modules/Web/Images/loading_screen.gif" alt="loader">
+    </div>
+</div>
+<div class="mobile-menu">
+    <nav>
+        <!--a data-popup="promo">Our service</a-->
+        <a data-popup="list-your-property">For landlords</a>
+        <a href="https://roomplaza.freshdesk.com/support/home" target="_blank">Help</a>
+    </nav>
+</div>
+
+
+<header class="main-header">
+    <div class="inner">
+        <a class="logo" href="/">
+            <img src="/Modules/Web/Images/logo.svg" alt="logo">
+        </a>
+        <nav>
+            <!--div>
+                <a data-popup="promo">Our service</a>
+            </div-->
+            <div>
+                <a data-popup="list-your-property">For landlords</a>
+            </div>
+            <div>
+                <a href="/en/html/web/content/home/partners">Partners</a>
+            </div>
+            <div>
+                <a href="https://roomplaza.freshdesk.com/support/home" target="_blank">
+                    Help
+                </a>
+            </div>
+                                        <div>
+                    <a href="/en/html/web/register">Sign up</a>
+                </div>
+                <div class="login not-logged">
+                    <a href="/en/html/web/login">Log in</a>
+                </div>
+                    </nav>
+        <div class="toggle-menu" data-bind="tap: toggleMobileMenu">
+            <div class="mobile-icon"></div>
+        </div>
+    </div>
+</header>
+
+<div class="popup promo video-popup">
+    <div class="center">
+        <div class="content" style="max-width: 850px;">
+            <div class="wrapper">
+                <div class="close"></div>
+                <video controls src="/Modules/Web/Content/Video/promo.mp4"></video>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup video-popup apartment-video">
+    <div class="center">
+        <div class="content">
+            <div class="wrapper">
+                <div class="close"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="list-your-property popup">
+    <div class="center">
+        <div class="content">
+            <div class="close"></div>
+            <form id="list-your-property">
+                <h2>For landlords</h2>
+                <p>
+                    RoomPlaza offers full management packages for landlords, investors and managers. Please
+                    leave your contact details here and we will contact you.
+                </p>
+                <br>
+                <table>
+                    <tr>
+                        <td>
+                            <label for="first_name2">
+                                <input type="text" name="firstname" class="mandatory" id="first_name2"
+                                       placeholder="First name">
+                            </label>
+                        </td>
+                        <td>
+                            <label for="last_name">
+                                <input type="text" name="lastname" class="mandatory" id="last_name"
+                                       placeholder="Last name">
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="email">
+                                <input type="email" name="email" class="mandatory" id="email" placeholder="Email">
+                            </label>
+                        </td>
+                        <td>
+                            <label for="phone">
+                                <input type="text" name="phone" class="mandatory" id="phone" placeholder="Phone">
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="city">
+                                <input type="text" name="city" class="mandatory" id="city" placeholder="City">
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </div>
+</div>
+
+    <div class="view view-overview">
+                    <div class="accommodations">
+                <div class="filter">
+    <form class="setFilters" method="get" action="/en/html/web/search/home"
+          id="search-filter-form">
+        <div data-bind="click: toggleMoreFilter">
+            Show filters
+        </div>
+
+        <div class="dropdown">
+            <label for="city" class="label">
+                                    <select name="city" id="city">
+                        <option value="" disabled selected>
+                            City                        </option>
+                                                                                                            <option value="2">
+                                Amsterdam                            </option>
+                                                                                                            <option value="3">
+                                Delft                            </option>
+                                                                                                            <option value="11">
+                                Eindhoven                            </option>
+                                                                                                            <option value="8">
+                                Enschede                            </option>
+                                                                                                            <option value="7">
+                                Haarlem                            </option>
+                                                                                                            <option value="5">
+                                Leiden                            </option>
+                                                                                                            <option value="1">
+                                Rotterdam                            </option>
+
+                                                <option value="4" selected="selected">
+                                The Hague                            </option>
+                                                                                                            <option value="6">
+                                Tilburg                            </option>
+                                                                                                            <option value="10">
+                                Valencia                            </option>
+                                                                                                            <option value="9">
+                                Wageningen                            </option>
+                                            </select>
+                            </label>
+        </div>
+
+        <div class="dropdown startDate">
+            <label for="startDate" class="label">
+                                    <select name="startDate" id="startDate" class="mandatory">
+                        <option value="" disabled selected>
+                            Start month                        </option>
+
+                                                <option
+                                    value="2024-04-01" selected="selected">
+                                April 2024                            </option>
+                                                                                                            <option
+                                    value="2024-05-01">
+                                May 2024                            </option>
+                                                                                                            <option
+                                    value="2024-06-01">
+                                June 2024                            </option>
+                                                                                                            <option
+                                    value="2024-07-01">
+                                July 2024                            </option>
+                                                                                                            <option
+                                    value="2024-08-01">
+                                August 2024                            </option>
+                                                                                                            <option
+                                    value="2024-09-01">
+                                September 2024                            </option>
+                                                                                                            <option
+                                    value="2024-10-01">
+                                October 2024                            </option>
+                                                                                                            <option
+                                    value="2024-11-01">
+                                November 2024                            </option>
+                                                                                                            <option
+                                    value="2024-12-01">
+                                December 2024                            </option>
+                                                                                                            <option
+                                    value="2025-01-01">
+                                January 2025                            </option>
+                                                                                                            <option
+                                    value="2025-02-01">
+                                February 2025                            </option>
+                                                                                                            <option
+                                    value="2025-03-01">
+                                March 2025                            </option>
+                                                                                                            <option
+                                    value="2025-04-01">
+                                April 2025                            </option>
+                                            </select>
+                            </label>
+        </div>
+        <div class="dropdown">
+            <label for="tenants">
+                <select name="tenants" id="tenants">
+                    <option value="1"  disabled>
+                        Group size
+                    </option>
+                    <option value="1" selected>
+                        1
+                    </option>
+                    <option value="2" >
+                        2
+                    </option>
+                    <option value="3" >
+                        3
+                    </option>
+                    <option value="4" >
+                        4
+                    </option>
+                    <option value="5" >
+                        5
+                    </option>
+                    <option value="6" >
+                        6
+                    </option>
+                    <option value="7" >
+                        7
+                    </option>
+                </select>
+            </label>
+        </div>
+
+        <div class="submit">
+            <input type="submit" value="Find flats">
+        </div>
+
+        <div data-bind="click: toggleMap">
+            Map
+        </div>
+    </form>
+</div>                <div class="accommodations-item-container">
+                    <h2>
+                                                    12 flatshares available in 3 flats
+          </h2>
+                    <!--appartment-->
+
+                        <a class="apartment" href="/en/html/web/apartment/home/635?city=4&startDate=2024-04-01&tenants=1"
+                           data-apartment-id="635" target="_blank">
+                            <figure>
+                                                                    <div class="tag" style="font-size: 14px;">
+                                        From 800&euro;                                    </div>
+                                                                                                    <div class="tag-right" style="background: none; padding-top: 10px; font-size: 14px;">
+                                                                            </div>
+                                                                <div class="wrapper no-video">
+                                    <div class="overlay">
+                                        <div>
+                                            <h2>View details</h2>
+                                            <button data-bind="tap: openVideo.bind(this, '')">
+                                                View video
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <img src="/Modules/Web/Content/Housing/Apartments/20240103120840_Afbeelding-van-WhatsApp-op-2024-01-03-om-11.29.23_9212d3ed.jpeg" alt="apartment">
+                                </div>
+                                <figcaption>
+                                    <div style="font-size: 14px;">
+                                        <span>
+                                                                                            1 of 1 flatshares available                                                                                    </span>
+                                    </div>
+                                    <div style="font-size: 14px;">
+                                        Beautiful 1-person studio at Van Speijkstraat in The Hague.
+
+
+
+
+                                                                                    </div>
+                                </figcaption>
+                            </figure>
+                        </a>
+
+                        <a class="apartment" href="/en/html/web/apartment/home/677?city=4&startDate=2024-04-01&tenants=1"
+                           data-apartment-id="677" target="_blank">
+                            <figure>
+                                                                    <div class="tag" style="font-size: 14px;">
+                                        From 305&euro;                                    </div>
+                                                                                                    <div class="tag" style="left: inherit; right: 0; font-size: 14px;">
+
+                                                                                    Fixed period - Apr '24 - Jul '24                                                                            </div>
+                                                                <div class="wrapper no-video">
+                                    <div class="overlay">
+                                        <div>
+                                            <h2>View details</h2>
+                                            <button data-bind="tap: openVideo.bind(this, '')">
+                                                View video
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <img src="/Modules/Web/Content/Housing/Apartments/20240304162947_Schermafbeelding-2024-03-04-163029.jpeg" alt="apartment">
+                                </div>
+                                <figcaption>
+                                    <div style="font-size: 14px;">
+                                        <span>
+                                                                                            10 of 11 flatshares available                                                                                    </span>
+                                    </div>
+                                    <div style="font-size: 14px;">
+                                        11-person flatshare on Valkenboslaan in The Hague
+
+
+
+
+                                                                                    </div>
+                                </figcaption>
+                            </figure>
+                        </a>
+
+                        <a class="apartment" href="/en/html/web/apartment/home/213?city=4&startDate=2024-04-01&tenants=1"
+                           data-apartment-id="213" target="_blank">
+                            <figure>
+                                                                    <div class="tag" style="font-size: 14px;">
+                                        From 680&euro;                                    </div>
+                                                                                                    <div class="tag" style="left: inherit; right: 0; font-size: 14px;">
+
+                                                                                    Booked until Aug '25
+                                                            </div>
+                                                                <div class="wrapper">
+                                    <div class="overlay">
+                                        <div>
+                                            <h2>View details</h2>
+                                            <button data-bind="tap: openVideo.bind(this, 'QIv2o8_KHSw')">
+                                                View video
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <img src="/Modules/Web/Content/Housing/Apartments/20211214170248_Screen-Shot-2020-05-17-at-17.37.24.jpeg" alt="apartment">
+                                </div>
+                                <figcaption>
+                                    <div style="font-size: 14px;">
+                                        <span>
+                                                                                            No flatshares available
+                                                                                    </span>
+                                    </div>
+                                    <div style="font-size: 14px;">
+                                        24 MONTHS (OR LONGER) - 3-person flatshare apartment Beekbergenstraat 73, The Hague
+                                                           <strong>
+                                                    (available from 04-08-2025)
+                                                </strong>
+
+
+
+                                                                                    </div>
+                                </figcaption>
+                            </figure>
+                        </a>
+                                    </div>
+                            </div>
+            <div class="map-container">
+                                    <div id="map" class="map" style="width: 100%;"></div>
+                            </div>
+            </div>
+    <div class="semester-error">
+        <div class="center">
+            <div class="content">
+                <form method="get" id="startDate-popup">
+                                                                                                        <input type="hidden" name="city" value="4">
+                                                                                    <input type="hidden" name="tenants" value="1">
+                                        <h2>Choose a start month first!</h2>
+                    <div class="dropdown">
+                        <label for="startDate">
+                                                            <select name="startDate" id="startDate" class="mandatory">
+                                    <option value="" disabled selected>
+                                        Start month                                    </option>
+
+
+<option value="2024-04-01" selected="selected">
+                                            April 2024                                        </option>
+
+                                    <option value="2024-05-01">
+                                            May 2024                                        </option>
+
+                                    <option value="2024-06-01">
+                                            June 2024                                        </option>
+
+                                    <option value="2024-07-01">
+                                            July 2024                                        </option>
+
+                                    <option value="2024-08-01">
+                                            August 2024                                        </option>
+
+                                    <option value="2024-09-01">
+                                            September 2024                                        </option>
+
+                                    <option value="2024-10-01">
+                                            October 2024                                        </option>
+
+                                    <option value="2024-11-01">
+                                            November 2024                                        </option>
+
+                                    <option value="2024-12-01">
+                                            December 2024                                        </option>
+
+                                    <option value="2025-01-01">
+                                            January 2025                                        </option>
+
+                                    <option value="2025-02-01">
+                                            February 2025                                        </option>
+
+                                    <option value="2025-03-01">
+                                            March 2025                                        </option>
+
+                                    <option value="2025-04-01">
+                                            April 2025                                        </option>
+                                                                    </select>
+                                                    </label>
+                    </div>
+                    <button type="submit">Continue</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        window['locations'] = [{"id":"635","name":"Beautiful 1-person studio at Van Speijkstraat in The Hague. ","longitude":"4.29288996","latitude":"52.08318463","link":"\/en\/html\/web\/apartment\/home\/635\/Beautiful-1-person-studio-at-Van-Speijkstraat-in-The-Hague.html?city=4&startDate=2024-04-01&tenants=1"},{"id":"677","name":"11-person flatshare on Valkenboslaan in The Hague","longitude":"4.27627800","latitude":"52.07796632","link":"\/en\/html\/web\/apartment\/home\/677\/11-person-flatshare-on-Valkenboslaan-in-The-Hague.html?city=4&startDate=2024-04-01&tenants=1"},{"id":"213","name":"24 MONTHS (OR LONGER) - 3-person flatshare apartment Beekbergenstraat 73, The Hague","longitude":"4.28098000","latitude":"52.06846000","link":"\/en\/html\/web\/apartment\/home\/213\/24-MONTHS-OR-LONGER-3-person-flatshare-apartment-Beekbergenstraat-73-The-Hague.html?city=4&startDate=2024-04-01&tenants=1"}];
+        window['universities'] = [{"name":"Leiden - University College","longitude":"4.32607900","latitude":"52.08174930"},{"name":"The Hague - Hotelschool","longitude":"4.29290140","latitude":"52.10789570"},{"name":"The Hague University of Applied Sciences","longitude":"4.32420590","latitude":"52.06678040"},{"name":"The Hague - ROC Mondriaan","longitude":"4.32009980","latitude":"52.06668200"},{"name":"The Hague - Inholland","longitude":"4.32951660","latitude":"52.08388510"},{"name":"The Hague - Royal Conservatoire","longitude":"4.33160600","latitude":"52.08113360"},{"name":"The Hague - Royal Academie of Art","longitude":"4.31941140","latitude":"52.08164010"},{"name":"The Hague - Campus Leiden University","longitude":"4.32360050","latitude":"52.08156110"},{"name":"The Hague - Social Studies Erasmus","longitude":"4.30316540","latitude":"52.08401710"},{"name":"Delft - Inholland","longitude":"4.36443560","latitude":"52.00441800"},{"name":"Delft - Nuffic","longitude":"4.30252380","latitude":"52.08361880"},{"name":"Leiden University","longitude":"4.48675940","latitude":"52.15666220"},{"name":"Leiden - Webster University","longitude":"4.48603000","latitude":"52.16061000"},{"name":"Delft TU - Architecture","longitude":"4.36959160","latitude":"52.00543820"},{"name":"Delft - IHE","longitude":"4.35673000","latitude":"52.00886710"},{"name":"Delft TU - Civil Engineering","longitude":"4.37609540","latitude":"51.99894590"},{"name":"Delft TU - Elektrical, Math, CS","longitude":"4.37348880","latitude":"51.99883540"},{"name":"Delft TU - Industrial Design","longitude":"4.36990140","latitude":"52.00163790"},{"name":"Delft TU - Aerospace Engineering ","longitude":"4.37532150","latitude":"51.98990940"},{"name":"Delft TU - Process & Energy Lab","longitude":"4.36998990","latitude":"51.99974930"},{"name":"Delft TU - Reactor Institute Delft","longitude":"4.38154790","latitude":"51.99078970"},{"name":"Delft TU - Sports- and Culture Centre","longitude":"4.37477700","latitude":"51.99486230"},{"name":"Delft TU - Tech, Policy and Management","longitude":"4.37028440","latitude":"52.00272890"},{"name":"Delft TU - Applied Physics ","longitude":"4.37406880","latitude":"52.00089180"},{"name":"Delft TU - Applied Sciences","longitude":"4.37992200","latitude":"51.98983400"},{"name":"Delft TU - Mech, Maritime- and Mat Eng","longitude":"4.37188190","latitude":"52.00099880"},{"name":"Delft TU - Building 2 Center","longitude":"4.36017410","latitude":"52.00742850"}];
+
+        window['page'] = 'Overview';
+    </script>
+<footer class="main-footer">
+    <div class="wrapper">
+        <table>
+            <tr>
+                <td>
+                    <a href="/en/html/web/content/home/aboutus">
+                        About us
+                    </a>
+                </td>
+                <td>
+                    <a href="mailto:support@roomplaza.com">
+                        Contact us
+                    </a>
+                </td>
+                <td>
+                    <a href="/en/html/web/content/home/termsandconditions">
+                        Terms & Conditions
+                    </a>
+                </td>
+                <td>
+                    <a href="/en/html/web/content/home/privacystatement">
+                        Privacy statement
+                    </a>
+                </td>
+                <td>
+                    <a href="/en/html/web/content/home/joinourteam">
+                        Join us
+                    </a>
+                </td>
+                <td>
+                    <a class="icon-facebook-with-circle" href="https://www.facebook.com/RoomPlazaFlatshares"
+                       target="_blank"></a>
+                    <a class="icon-instagram" href="https://www.instagram.com/roomplaza/" target="_blank"></a>
+                    <a class="icon-twitter" href="https://twitter.com/roomplaza" target="_blank"></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</footer>
+
+<style type="text/css">
+    .cookies {
+        position: fixed;
+        z-index: 2000;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #e22d23;
+    }
+
+    .cookies-item-container {
+        position: relative;
+        width: calc(100vw / 2);
+        padding: 20px 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cookie-text {
+        text-align: center;
+        color: white;
+        padding: 20px;
+    }
+
+    .cookie-text img {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+
+    .accept-button {
+        position: relative;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .accept-button button {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        background: white;
+        color: black;
+        padding: 0 28px;
+        box-sizing: border-box;
+        font: 15px/55px "neuzeit-regular";
+        border-radius: 3px;
+        -webkit-appearance: none;
+    }
+
+    @media screen and (max-width: 812px) {
+        .cookies-item-container {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="cookies">
+    <div class="cookies-item-container">
+        <div class="cookie-text">
+            <img src="/Modules/Web/img/close.png" alt="close" onclick="closeCookieConsent()">
+            <p>
+                We use cookies to give you the best online experience. Please let us know if you agree to these cookies.
+            </p>
+        </div>
+        <p class="accept-button">
+            <button onclick="acceptCookies()">I agree</button>
+        </p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    closeCookieConsent = function () {
+        document.cookie = 'cookieConsent=false; max-age=31536000; path=/';
+
+        window.location.reload();
+    };
+
+    acceptCookies = function () {
+        document.cookie = 'cookieConsent=true; max-age=31536000; path=/';
+
+        window.location.reload();
+    };
+</script>
+<div id="fb-root"></div>
+
+<script src="/Modules/Web/Js/app/config/requirejs.config.js?v=1.1"></script>
+<script src="/Modules/Web/Js/lib/require/require.js?v=1.1" data-main="app/Main"></script>
+
+
+
+</body>
+</html>
