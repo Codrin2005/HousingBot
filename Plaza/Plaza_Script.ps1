@@ -1,5 +1,5 @@
 #$json = Get-Content 'C:\Docker\input\codrin.json' | Out-String
-$json = Get-Content 'C:\Users\Codrin\Plaza_bot\codrin.json' | Out-String
+$json = Get-Content 'C:\Users\Codrin\Plaza_bot\plaza_listings.json' | Out-String
 $url = "https://mosaic-plazaapi.hexia.io/api/v1/actueel-aanbod?limit=60&locale=nl_NL&page=0&sort=%2BreactionData.aangepasteTotaleHuurprijs"
 
 $webreq = Invoke-RestMethod -Uri $url -Method Post -Body $json  -ContentType "application/json"
