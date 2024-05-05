@@ -7,7 +7,7 @@ $htmlCode = $response.Content
 
 # Construct array of exisiting ids
 # Read the lines from the text file
-$lines = Get-Content -Path ".\RoomPlaza_ids.txt"
+$lines = Get-Content -Path ".\RoomPlaza\RoomPlaza_ids.txt"
 
 # Initialize an empty array to store the integers
 $integers = @()
@@ -32,8 +32,8 @@ $password = ConvertTo-SecureString "utxb ujbd tmoy qmxz" -AsPlainText -Force
 $sendMailMessageSplat = @{
     From = "rcodrin13@gmail.com"
     To = "rcodrin13@gmail.com"
-    Subject = "Plaza!" 
-    Body = "Plazaaaaaa!!!"
+    Subject = "RoomPlaza!" 
+    Body = "S-a pus anunt pe RoomPlaza!"
     SmtpServer = "smtp.gmail.com"
     Credential = New-Object System.Management.Automation.PSCredential -ArgumentList  $username, $password
     usessl = $true
@@ -42,11 +42,14 @@ $sendMailMessageSplat = @{
 
 
 # Check for new ids
-Out-File .\RoomPlaza_ids.txt
+Out-File .\RoomPlaza\RoomPlaza_ids.txt
 foreach ($element in $elements) {
     $id = $element.GetAttributeValue("data-apartment-id", "-1") # get the id as string
-    $id >> "./RoomPlaza_ids.txt" # write to file
+    $id >> "./RoomPlaza/RoomPlaza_ids.txt" # write to file
     if (!($integers -contains $id)){
+      $sendMailMessageSplat.To = "rcodrin13@gmail.com"
+      Send-MailMessage @sendMailMessageSplat
+      $sendMailMessageSplat.To = "vlad.anicapopa@gmail.com"
       Send-MailMessage @sendMailMessageSplat
     }
 }

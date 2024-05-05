@@ -1,13 +1,24 @@
 #$json = Get-Content 'C:\Docker\input\codrin.json' | Out-String
-$json = Get-Content 'C:\Users\Codrin\Plaza_bot\plaza_listings.json' | Out-String
+$json = Get-Content 'C:\Users\Codrin\Plaza_bot\Plaza\plaza_listings.json' | Out-String
 $url = "https://mosaic-plazaapi.hexia.io/api/v1/actueel-aanbod?limit=60&locale=nl_NL&page=0&sort=%2BreactionData.aangepasteTotaleHuurprijs"
 
 $webreq = Invoke-RestMethod -Uri $url -Method Post -Body $json  -ContentType "application/json"
 
 
 $a = $webreq.ToLower() | ConvertFrom-Json
-#$a = $webreq
-write-host $a.data.Length
+
+# Construct array of exisiting ids
+# Read the lines from the text file
+$lines = Get-Content -Path ".\Plaza\Plaza_ids.txt"
+
+# Initialize an empty array to store the integers
+$integers = @()
+
+# Loop through each line
+foreach ($line in $lines) {
+    # Try to parse the line as an integer
+    $integers += $line
+}
 
 $username = "rcodrin13@gmail.com"
 $password = ConvertTo-SecureString "utxb ujbd tmoy qmxz" -AsPlainText -Force
@@ -22,8 +33,11 @@ $sendMailMessageSplat = @{
     verbose = $true
 }
 
-write-host $a.data[0].id
-
-#if ($a.data.length -ne 0) {
-  #  Send-MailMessage @sendMailMessageSplat
-#}
+Out-File .\Plaza\Plaza_ids.txt
+foreach($room in $a.data) {
+  $id = $room.id
+  $id >> "./Plaza/Plaza_ids.txt" # write to file
+  if (!($integers -contains $id)){
+    Send-MailMessage @sendMailMessageSplat
+  }
+}
