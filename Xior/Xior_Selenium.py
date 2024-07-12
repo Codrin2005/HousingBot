@@ -1,6 +1,6 @@
 from selenium import webdriver
 
-driver = webdriver.Firefox()  # or webdriver.Chrome(), depending on your browser
+driver = webdriver.Chrome()  # or webdriver.Chrome(), depending on your browser
 driver.get('https://xior-booking.com/#')
 
 # Get a list of all cookies

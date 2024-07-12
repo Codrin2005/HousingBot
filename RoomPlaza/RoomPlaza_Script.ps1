@@ -1,5 +1,5 @@
 # url for coresponding filters (DELFT)
-$url = 'https://www.roomplaza.com/en/html/web/search/home?city=3&startDate=2024-04-01&tenants=1'
+$url = 'https://www.roomplaza.com/en/html/web/search/home?city=3&tenants=1'
 
 # Get the html code
 $response = Invoke-WebRequest -Uri $url
@@ -7,7 +7,7 @@ $htmlCode = $response.Content
 
 # Construct array of exisiting ids
 # Read the lines from the text file
-$lines = Get-Content -Path ".\RoomPlaza\RoomPlaza_ids.txt"
+$lines = Get-Content -Path ".\RoomPlaza_ids.txt"
 
 # Initialize an empty array to store the integers
 $integers = @()
@@ -42,14 +42,14 @@ $sendMailMessageSplat = @{
 
 
 # Check for new ids
-Out-File .\RoomPlaza\RoomPlaza_ids.txt
+Out-File ".\RoomPlaza_ids.txt"
 foreach ($element in $elements) {
     $id = $element.GetAttributeValue("data-apartment-id", "-1") # get the id as string
-    $id >> "./RoomPlaza/RoomPlaza_ids.txt" # write to file
+    $id >> "./RoomPlaza_ids.txt" # write to file
     if (!($integers -contains $id)){
       $sendMailMessageSplat.To = "rcodrin13@gmail.com"
-      Send-MailMessage @sendMailMessageSplat
+      #Send-MailMessage @sendMailMessageSplat
       $sendMailMessageSplat.To = "vlad.anicapopa@gmail.com"
-      Send-MailMessage @sendMailMessageSplat
+      #Send-MailMessage @sendMailMessageSplat
     }
 }
