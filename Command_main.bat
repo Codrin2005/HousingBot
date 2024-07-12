@@ -1,1 +1,0 @@
-powershell -ExecutionPolicy Bypass -File C:\Users\Codrin\Plaza_bot\RoomPlaza_Script.ps1
