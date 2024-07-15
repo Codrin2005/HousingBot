@@ -13,7 +13,7 @@ app.put('/api/email', (req, res) => {
     const mail = req.body.data;
     console.log(typeof mail);
     console.log(req.body);
-    fs.writeFile('./Server/emailList.txt', String(mail), (err) => {
+    fs.appendFile('./Server/emailList.txt', String(mail) + '\n', (err) => {
         if (err) throw err;
         console.log('Email has been written to emailList.txt');
     });
