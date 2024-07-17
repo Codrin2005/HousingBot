@@ -11,11 +11,9 @@ const fs = require('fs');
 
 app.put('/api/email', (req, res) => {
     const mail = req.body.data;
-    console.log(typeof mail);
-    console.log(req.body);
     fs.appendFile('./Server/emailList.txt', String(mail) + '\n', (err) => {
         if (err) throw err;
-        console.log('Email has been written to emailList.txt');
+        console.log('"' + String(mail) + '" has been written to emailList.txt');
     });
     res.status(200).json({ message: 'Email has been written successfully' });
 });
