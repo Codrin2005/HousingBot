@@ -18,13 +18,14 @@ foreach ($line in $lines) {
 }
 
 $username = "rcodrin13@gmail.com"
-$password = ConvertTo-SecureString "utxb ujbd tmoy qmxz" -AsPlainText -Force
+$password = ConvertTo-SecureString "pykj ixbb mtms wovw" -AsPlainText -Force
 $sendMailMessageSplat = @{
     From = "rcodrin13@gmail.com"
     To = "rcodrin13@gmail.com"
     Subject = "Plaza!" 
     Body = "Plazaaaaaa!!!"
     SmtpServer = "smtp.gmail.com"
+    Port = 587
     Credential = New-Object System.Management.Automation.PSCredential -ArgumentList  $username, $password
     usessl = $true
     verbose = $true
