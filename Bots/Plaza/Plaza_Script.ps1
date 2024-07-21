@@ -17,6 +17,11 @@ foreach ($line in $lines) {
     $integers += $line
 }
 
+$body = "new listings found on Plaza! See them here:
+https://plaza.newnewnew.space/aanbod/wonen#?gesorteerd-op=prijs%2B&locatie=Delft-Nederland%2B-%2BZuid-Holland
+See the details below:"
+$contor = 0
+
 $username = "rcodrin13@gmail.com"
 $password = ConvertTo-SecureString "pykj ixbb mtms wovw" -AsPlainText -Force
 $sendMailMessageSplat = @{
@@ -34,11 +39,32 @@ $sendMailMessageSplat = @{
 Out-File ".\Bots\Plaza\Plaza_ids.txt"
 foreach($room in $a.data) {
   $id = $room.id
-  $id >> ".\Bots\Plaza\Plaza_ids.txt" # write to file
+  $strada = $room.street
+  $nr = $room.housenumber
+  $oras = $room.gemeentegeolocatienaam
+  $available = $room.availablefromdate
+  $area = $room.arealivingroom
+  $publication = $room.publicationdate
+  $rent = $room.totalrent
+  $url = $room.urlkey
+  #$id >> ".\Bots\Plaza\Plaza_ids.txt" # write to file
   if (!($integers -contains $id)){
-    #Send-MailMessage @sendMailMessageSplat
-    write-host "hello"
+    $contor += 1
+    $body += "
+    
+Address: $strada $nr $oras
+Available from: $available
+Total area: $area
+Published at: $publication
+Total rent: $rent
+Link: https://plaza.newnewnew.space/aanbod/huurwoningen/details/$url"
   }
 }
-#one-time email to admin for dev-testing purposes
-Send-MailMessage @sendMailMessageSplat
+$body = "$contor $body"
+
+# Define the path to the Node.js executable and the JavaScript file
+$nodePath = "C:\Program Files\nodejs\node.exe"  # Adjust this path if Node.js is installed elsewhere
+$scriptPath = "./Server/mailService.js"          # Replace with the actual path to your script.js file
+
+# Call the JavaScript file using Node.js and pass the arguments
+& $nodePath $scriptPath $body
