@@ -20,21 +20,8 @@ foreach ($line in $lines) {
 $body = "new listings found on Plaza! See them here:
 https://plaza.newnewnew.space/aanbod/wonen#?gesorteerd-op=prijs%2B&locatie=Delft-Nederland%2B-%2BZuid-Holland
 See the details below:"
-$contor = 0
 
-$username = "rcodrin13@gmail.com"
-$password = ConvertTo-SecureString "pykj ixbb mtms wovw" -AsPlainText -Force
-$sendMailMessageSplat = @{
-    From = "rcodrin13@gmail.com"
-    To = "rcodrin13@gmail.com"
-    Subject = "Plaza!" 
-    Body = "Plazaaaaaa!!!"
-    SmtpServer = "smtp.gmail.com"
-    Port = 587
-    Credential = New-Object System.Management.Automation.PSCredential -ArgumentList  $username, $password
-    usessl = $true
-    verbose = $true
-}
+$contor = 0
 
 Out-File ".\Bots\Plaza\Plaza_ids.txt"
 foreach($room in $a.data) {
