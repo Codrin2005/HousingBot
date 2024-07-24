@@ -3,7 +3,7 @@ const fs = require('fs').promises;
 
 async function readFile() {
     try {
-        const data = await fs.readFile('./Server/emailList.txt', 'utf8');
+        const data = await fs.readFile('./Server/emailListDummy.txt', 'utf8');
         return data;
     } catch (err) {
         console.error(err);
