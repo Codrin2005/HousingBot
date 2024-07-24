@@ -13,7 +13,6 @@ async function readFile() {
 async function sendMails(body){
     let receivers = await readFile();
     
-
     // Create a transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -29,9 +28,8 @@ async function sendMails(body){
     let mailOptions = {
         from: '"HousingBot" <rcodrin13@gmail.com>', // sender address
         to: receivers, // list of receivers
-        subject: "Hello ✔", // Subject line
-        text: "Hello world?", // plain text body
-        html: "<b>Hello world?</b>", // html body
+        subject: "Test", // Subject line
+        text: body, // plain text body
     };
 
     // Send mail with defined transport object
