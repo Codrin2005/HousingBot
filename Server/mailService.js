@@ -1,5 +1,13 @@
 function sendMails(body){
-    console.log("bau: "+body);
+    Email.send({
+        Host: "smtp.gmail.com",
+        Username: "rcodrin13@gmail.com",
+        Password: "pykj ixbb mtms wovw",
+        To: 'rcodrin13@gmail.com',
+        From: "rcodrin13@gmail.com",
+        Subject: "Sending Email using JavaScript",
+        Body: "This is a test email sent using JavaScript!",
+    })
 }
 
 module.exports = {
