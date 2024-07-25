@@ -1,27 +1,14 @@
 const nodemailer = require('nodemailer');
 const fs = require('fs').promises;
 
-function identifyCharacter(char) {
-    return `Character: ${char}, Unicode code point: ${char.charCodeAt(0)}, Unicode: \\u${char.charCodeAt(0).toString(16).padStart(4, '0')}`;
-}
-
 async function readFile() {
-    try {
-        const data = await fs.readFile('./Server/emailListDummy.txt', 'utf8');
-        let a = [];
-        let contor = 0;
-        a[0] = "";
-        for (let i = 0; i<data.length; i++){
-            if (data[i] != '\u000d' && data[i] != '\u000a')
-                a[contor] += data[i];
-            else if (data[i] == '\u000d')
-                a[++contor] = "";
-        }
-        console.log(identifyCharacter(a[2].charAt(0)));
-        return a;
-    } catch (err) {
-        console.error(err);
+    let a = [];
+    let contor = 0;
+    const file = await fs.open('./Server/emailListDummy.txt');
+    for await (const line of file.readLines()) {
+        a[contor++] = line;
     }
+    return a;
 }
 
 async function sendMails(body){
@@ -47,15 +34,14 @@ async function sendMails(body){
     };
 
     for (let i = 0; i<receivers.length; i++){
-        console.log("This is a receiver: " + receivers[i]);
         mailOptions.to = receivers[i];
-        /*transporter.sendMail(mailOptions, (error, info) => {
+        transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 return console.log(error);
             }
             console.log("Message sent: %s", info.messageId);
             console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-        });*/
+        });
     }
 
 }
