@@ -3,6 +3,8 @@
     "chromedriver": "^126.0.5",
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "selenium-webdriver": "^4.23.0"
+    "selenium-webdriver": "^4.23.0",
+    "node-powershell": "^5.0.1",
+    "nodemailer": "^6.9.14"
   }
 }
