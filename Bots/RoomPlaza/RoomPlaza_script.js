@@ -1,7 +1,7 @@
 const { Builder, By, until } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 const chromedriver = require("chromedriver");
-const {sendMails} = require("./Server/mailService.js");
+const {sendMails} = require('../../Server/mailService.js');
 
 async function findingDory(city, newIds, hrefs) {
     const fs = require("fs");
@@ -58,7 +58,7 @@ async function findingDory(city, newIds, hrefs) {
         let body = newListings.length 
                 + " new listings found on RoomPlaza in "
                 + city;
-        sendMail(body);
+        sendMails(body);
     }
 
     return newListings;
