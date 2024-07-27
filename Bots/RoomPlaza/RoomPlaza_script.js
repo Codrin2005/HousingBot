@@ -1,6 +1,7 @@
 const { Builder, By, until } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 const chromedriver = require("chromedriver");
+const {sendMails} = require('../../Server/mailService.js');
 
 async function findingDory(city, newIds, hrefs) {
     const fs = require("fs");
@@ -52,6 +53,13 @@ async function findingDory(city, newIds, hrefs) {
             console.log("File written successfully!");
         }
     });
+
+    if(newListings.length > 0){
+        let body = newListings.length 
+                + " new listings found on RoomPlaza in "
+                + city;
+        sendMails(body);
+    }
 
     return newListings;
 }
@@ -118,9 +126,7 @@ async function findingNemoRP(city) {
             );
 
             for (let i = 0; i < apartments.length; i++) {
-                newIds.push(
-                    await apartments[i].getAttribute("data-apartment-id")
-                );
+                newIds.push(await apartments[i].getAttribute("data-apartment-id"));
                 hrefs.push(await apartments[i].getAttribute("href"));
             }
 
