@@ -1,23 +1,25 @@
 document.getElementById('submitButton').addEventListener('click', async () => {
-    const url = 'http://localhost:3000/api/email';
+    const url = 'http://localhost:3000/api/create-stripe-payment';
     const data = String(document.getElementById('email').value);
 
     try {
-        console.log(data);
+        //console.log(data);
         const response = await fetch(url, {
-            method: 'PUT',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ data: data })
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const responseData = await response.json();
-        console.log('Response:', responseData);
+        }).then(response => response.json())
+        .then(data => {
+            const url = data.message; // Adjust according to your API response structure
+            if (url && url !== 'undefined') {
+                window.location.assign(url);
+            } else {
+                console.error('Invalid URL:', url);
+            }
+        })
+        .catch(error => console.error('Error fetching URL:', error));
     } catch (error) {
         console.error('Error:', error);
     }
