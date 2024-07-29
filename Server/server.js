@@ -22,9 +22,9 @@ app.put('/api/email', (req, res) => {
 app.post('/api/create-stripe-payment', async (req, res) => {
     try{
         const session = await stripe.checkout.sessions.create({
-            //payment_method_types: ['card'],
+            payment_method_types: ['card', 'ideal'],
             mode: 'payment',
-            success_url: 'https://www.example.com',
+            success_url: 'https://github.com/Codrin2005/HousingBot',
             cancel_url: 'https://www.example.com',
             line_items: [
                 {

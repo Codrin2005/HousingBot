@@ -3,7 +3,6 @@ document.getElementById('submitButton').addEventListener('click', async () => {
     const data = String(document.getElementById('email').value);
 
     try {
-        //console.log(data);
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -16,10 +15,10 @@ document.getElementById('submitButton').addEventListener('click', async () => {
             if (url && url !== 'undefined') {
                 window.location.assign(url);
             } else {
-                console.error('Invalid URL:', url);
+                console.error('Invalid payment URL:', url);
             }
         })
-        .catch(error => console.error('Error fetching URL:', error));
+        .catch(error => console.error('Error fetching payment URL:', error));
     } catch (error) {
         console.error('Error:', error);
     }
