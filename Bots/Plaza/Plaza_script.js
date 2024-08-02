@@ -1,11 +1,69 @@
 const { Builder, By, until } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 const chromedriver = require("chromedriver");
-const { sendMails } = require("../../Server/mailService.js");
 
+async function acceptCookies(driver) {
+    try {
+        const button = await driver.findElement(
+            By.id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")
+        );
+        await button.click();
+        return driver;
+    } catch (error) {
+        console.log("error acceptCookies Plaza: ", error);
+    }
+}
+
+async function configChoices(driver, city) {
+    try {
+        const dropdown = await driver.findElement(
+            By.className(
+                "filter locatie-filter template-type-filter tooltipstered"
+            )
+        );
+        await dropdown.click();
+        const options = await driver.findElements(
+            By.className("locatie-preset ng-scope")
+        );
+        for (let i = 0; i < options.length; i++) {
+            const span = await options[i].findElement(By.css("span"));
+            if (span.getText() === city) {
+                await options[i].click();
+                return driver;
+            }
+        }
+    } catch (error) {
+        console.log("error configChoices Plaza: ", error);
+    }
+}
+
+async function getListings(driver) {
+    let ids = [];
+    let hrefs = [];
+    try {
+        const divs = await driver.findElements(
+            By.className("list-item-content")
+        );
+        console.log("Number of sections found:", sections.length);
+
+        for (let i = 0; i < divs.length; i++) {
+            const div = await divs[i].findElement(
+                By.xpath(".//div/ng-include/div")
+            );
+            const a = await div.findElement(By.css("a"));
+
+            ids.push(await div.getAttribute("id"));
+            hrefs.push(await a.getAttribute("href"));
+        }
+    } catch (error) {
+        console.log("error getListings Plaza", error);
+    }
+
+    return { ids, hrefs };
+}
 async function findingDory(city, newIds, hrefs) {
     const fs = require("fs");
-    const filePath = "./Bots/RoomPlaza/RoomPlaza_" + city + "_ids.txt";
+    const filePath = "./Bots/Plaza/Plaza_" + city + "_ids.txt";
     await fs.access(filePath, fs.constants.F_OK, (err) => {
         if (err) {
             // File does not exist, create it
@@ -33,7 +91,7 @@ async function findingDory(city, newIds, hrefs) {
             console.error("Error reading file:", err);
         } else {
             console.log(`File ${filePath} content:`, data);
-            ids = data.split("/s+/").map(Number);
+            ids = data.split("/s+/");
         }
     });
 
@@ -63,9 +121,11 @@ async function findingDory(city, newIds, hrefs) {
     return newListings;
 }
 
-async function findingNemoRP(city) {
-    const url = "https://www.roomplaza.com/";
+async function findingNemoP(city) {
+    const url =
+        "https://plaza.newnewnew.space/aanbod/wonen#?gesorteerd-op=prijs%2B";
     let driver;
+
     try {
         // Set up Chrome options
         const options = new chrome.Options();
@@ -81,62 +141,12 @@ async function findingNemoRP(city) {
         // Navigate to the URL
         await driver.get(url);
         // Introduce a short delay
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        let cookieButton = await driver.findElements(
-            By.className("accept-button")
-        );
-        if (cookieButton.length > 0) {
-            let cookieButton2 = await cookieButton[0].findElements(
-                By.css("button")
-            );
-            if (cookieButton2.length > 0) {
-                await cookieButton2[0].click();
-            }
-        }
+        driver = await acceptCookies(driver);
+        driver = await configChoices(driver, city);
 
-        let dropdown = driver.findElement(By.className("dropdown"));
-        dropdown.click();
-        let cityOptions = await dropdown.findElement(By.css("ul"));
-        let cityOption = await cityOptions.findElement(
-            By.xpath(`//*[text()='${city}']`)
-        );
-        cityOption.click();
-
-        let searchButton = await driver.findElement(By.id("submit"));
-        await searchButton.click();
-
-        let newIds = [];
-        let hrefs = [];
-
-        let buttonInd = 1;
-        //await new Promise((resolve) => setTimeout(resolve, 300000));
-
-        let buttons = await driver.findElement(By.className("pagination"));
-        let nextButton = await buttons.findElements(
-            By.xpath(`//*[text()='${buttonInd}']`)
-        );
-
-        while (nextButton.length > 0) {
-            await new Promise((resolve) => setTimeout(resolve, 1500));
-            await nextButton[0].click();
-            let apartments = await driver.findElements(
-                By.className("apartment")
-            );
-
-            for (let i = 0; i < apartments.length; i++) {
-                newIds.push(
-                    await apartments[i].getAttribute("data-apartment-id")
-                );
-                hrefs.push(await apartments[i].getAttribute("href"));
-            }
-
-            buttonInd++;
-            buttons = await driver.findElement(By.className("pagination"));
-            nextButton = await buttons.findElements(
-                By.xpath(`//*[text()='${buttonInd}']`)
-            );
-        }
+        const { newIds, hrefs } = await getListings(driver);
 
         for (let i = 0; i < newIds.length; i++) {
             console.log(newIds[i]);
@@ -153,7 +163,7 @@ async function findingNemoRP(city) {
     }
 }
 
-(async function testRP() {
-    let result = await findingNemoRP("Amsterdam");
+(async function testP() {
+    let result = await findingNemoP("Nederland - Zuid-Holland");
     console.log(result);
 })();
