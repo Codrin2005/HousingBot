@@ -9,7 +9,6 @@ app.use(cors());
 
 const fs = require('fs');
 
-
 app.put('/api/email', (req, res) => {
     const mail = req.body.data;
     fs.appendFile('./Server/emailList.txt', String(mail) + '\n', (err) => {
