@@ -12,6 +12,7 @@ async function acceptCookies(driver) {
     } catch (error) {
         console.log("error acceptCookies Plaza: ", error);
     }
+    return driver;
 }
 
 async function configChoices(driver, city) {
@@ -27,14 +28,17 @@ async function configChoices(driver, city) {
         );
         for (let i = 0; i < options.length; i++) {
             const span = await options[i].findElement(By.css("span"));
-            if (span.getText() === city) {
+            if ((await span.getText()) === city) {
+                console.log("found it: " + (await span.getText()));
                 await options[i].click();
+                await new Promise((resolve) => setTimeout(resolve, 1000));
                 return driver;
             }
         }
     } catch (error) {
         console.log("error configChoices Plaza: ", error);
     }
+    return driver;
 }
 
 async function getListings(driver) {
@@ -44,22 +48,34 @@ async function getListings(driver) {
         const divs = await driver.findElements(
             By.className("list-item-content")
         );
-        console.log("Number of sections found:", sections.length);
+        console.log("number of listings: " + divs.length);
 
         for (let i = 0; i < divs.length; i++) {
+            console.log("line 53 so far so good " + i);
             const div = await divs[i].findElement(
                 By.xpath(".//div/ng-include/div")
             );
+            console.log("line 57 also good");
             const a = await div.findElement(By.css("a"));
+            console.log("line 59: ");
 
             ids.push(await div.getAttribute("id"));
             hrefs.push(await a.getAttribute("href"));
+            console.log(
+                "line 63: " +
+                    hrefs[hrefs.length - 1] +
+                    " " +
+                    ids[ids.length - 1]
+            );
         }
+        console.log("line 63 it is done");
     } catch (error) {
-        console.log("error getListings Plaza", error);
+        console.log("error getListings Plaza: ", error);
     }
+    console.log("line 75");
+    console.log(hrefs);
 
-    return { ids, hrefs };
+    return [ids, hrefs];
 }
 async function findingDory(city, newIds, hrefs) {
     const fs = require("fs");
@@ -111,13 +127,6 @@ async function findingDory(city, newIds, hrefs) {
             console.log("File written successfully!");
         }
     });
-
-    if (newListings.length > 0) {
-        let body =
-            newListings.length + " new listings found on RoomPlaza in " + city;
-        sendMails(body);
-    }
-
     return newListings;
 }
 
@@ -141,13 +150,13 @@ async function findingNemoP(city) {
         // Navigate to the URL
         await driver.get(url);
         // Introduce a short delay
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         driver = await acceptCookies(driver);
         driver = await configChoices(driver, city);
 
-        const { newIds, hrefs } = await getListings(driver);
-
+        const [newIds, hrefs] = await getListings(driver);
+        console.log(newIds);
         for (let i = 0; i < newIds.length; i++) {
             console.log(newIds[i]);
             console.log(hrefs[i]);
@@ -155,7 +164,7 @@ async function findingNemoP(city) {
 
         return findingDory(city, newIds, hrefs);
     } catch (error) {
-        console.error("An error occurred:", error);
+        console.error("Error findingNemoP Plaza:", error);
     } finally {
         if (driver) {
             await driver.quit();
