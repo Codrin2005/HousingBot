@@ -2,12 +2,14 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const cors = require('cors');
-const stripe = require('stripe')('sk_test_51PgvX4RpDrfOWwfbODoSMZL7pztuzOSLZsrCp8oMRtvMxjoZypFRtqfBNZXmDwuPFNvPSy1fFcy0kJHv8Doy6zMB00OMmBdlbP');
+const stripe = require('stripe')(process.env.STRIPE_KEY);
 
 app.use(express.json());
 app.use(cors());
 
 const fs = require('fs');
+
+require('dotenv').config({ path: './Server/server.env' });
 
 app.put('/api/email', (req, res) => {
     const mail = req.body.data;
@@ -23,12 +25,11 @@ app.post('/api/create-stripe-payment', async (req, res) => {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card', 'ideal'],
             mode: 'payment',
-            success_url: 'https://github.com/Codrin2005/HousingBot',
-            cancel_url: 'https://www.example.com',
+            success_url: process.env.STRIPE_SUCCESS_URL,
+            cancel_url: process.env.STRIPE_FAIL_URL,
             line_items: [
                 {
-                  // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                  price: 'price_1PhTO6RpDrfOWwfbFgLCUvU7',
+                  price: process.env.STRIPE_PRICE_ID,
                   quantity: 1,
                 }
               ]
