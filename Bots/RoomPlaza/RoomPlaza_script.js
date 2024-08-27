@@ -157,3 +157,5 @@ async function findingNemoRP(city) {
     let result = await findingNemoRP("Amsterdam");
     console.log(result);
 })();
+
+module.exports = {findingNemoRP};
