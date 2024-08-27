@@ -171,8 +171,10 @@ async function findingNemoP(city) {
         }
     }
 }
+module.exports = {findingNemoP};
 
-(async function testP() {
+/*(async function testP() {
     let result = await findingNemoP("Nederland - Zuid-Holland");
     console.log(result);
 })();
+*/
