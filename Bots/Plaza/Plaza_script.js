@@ -175,6 +175,5 @@ module.exports = {findingNemoP};
 
 /*(async function testP() {
     let result = await findingNemoP("Nederland - Zuid-Holland");
-    console.log(result);
-})();
-*/
+    console.log("result length: " + result.length);
+})();*/
