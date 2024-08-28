@@ -18,9 +18,9 @@ exec(`node ./Server/server.js`, (error, stdout, stderr) => {
 async function runBots(){
   result = await findingNemoP('Nederland - Zuid-Holland');
   if (result.length > 0){
+    console.log("bag pula");
     sendMails("Found " + result.length + " new listings on Plaza");
   }
 }
 
 setInterval(runBots, 60000);
-runBots();
