@@ -1,3 +1,5 @@
+require('dotenv').config({ path: './Server/server.env' });
+
 const express = require('express');
 const app = express();
 const port = process.env.SERVER_PORT;
@@ -8,8 +10,6 @@ app.use(express.json());
 app.use(cors());
 
 const fs = require('fs');
-
-require('dotenv').config({ path: './Server/server.env' });
 
 app.put('/api/email', (req, res) => {
     const mail = req.body.data;
