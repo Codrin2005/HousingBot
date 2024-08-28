@@ -31,7 +31,7 @@ async function configChoices(driver, city) {
             if ((await span.getText()) === city) {
                 console.log("found it: " + (await span.getText()));
                 await options[i].click();
-                await new Promise((resolve) => setTimeout(resolve, 1000));
+                await new Promise((resolve) => setTimeout(resolve, 2000));
                 return driver;
             }
         }
@@ -78,42 +78,44 @@ async function getListings(driver) {
     return [ids, hrefs];
 }
 async function findingDory(city, newIds, hrefs) {
-    const fs = require("fs");
+    const fs = require("fs").promises;
     const filePath = "./Bots/Plaza/Plaza_" + city + "_ids.txt";
-    await fs.access(filePath, fs.constants.F_OK, (err) => {
-        if (err) {
-            // File does not exist, create it
-            fs.open(filePath, "w", (err, fd) => {
-                if (err) {
-                    console.error("Error creating file:", err);
-                } else {
-                    fs.close(fd, (err) => {
-                        if (err) {
-                            console.error("Error closing file:", err);
-                        } else {
-                            console.log("File created successfully!");
-                        }
-                    });
-                }
-            });
-        } else {
-            console.log("File already exists.");
-        }
-    });
-
+    try{
+        await fs.access(filePath, fs.constants.F_OK);
+        console.log("File already exists.");
+    }
+    catch(err){
+        // File does not exist, create it
+        fs.open(filePath, "w", (err, fd) => {
+            if (err) {
+                console.error("Error creating file:", err);
+            } else {
+                fs.close(fd, (err) => {
+                    if (err) {
+                        console.error("Error closing file:", err);
+                    } else {
+                        console.log("File created successfully!");
+                    }
+                });
+            }
+        });
+    }
     let ids = [];
-    await fs.readFile(filePath, "utf8", (err, data) => {
-        if (err) {
-            console.error("Error reading file:", err);
-        } else {
-            console.log(`File ${filePath} content:`, data);
-            ids = data.split("/s+/");
-        }
-    });
+    try{
+        const data = await fs.readFile(filePath, "utf8");
+        console.log(`File ${filePath} content:`, data);
+        ids = data.split(/\s+/);
+    }
+    catch(err){
+        console.error("Error reading file:", err);
+    }
+
+    console.log("read from file: " + ids + "\n");
+    console.log("read from browser: " + newIds + "\n");
 
     let newListings = [];
     let data = "";
-    for (let i = 0; i < newIds.length; i++) {
+    for (let i = 0; i < newIds.length; i++){
         if (!ids.includes(newIds[i])) {
             newListings.push({ id: newIds[i], href: hrefs[i] });
         }
@@ -173,7 +175,7 @@ async function findingNemoP(city) {
 }
 module.exports = {findingNemoP};
 
-/*(async function testP() {
+(async function testP() {
     let result = await findingNemoP("Nederland - Zuid-Holland");
     console.log("result length: " + result.length);
-})();*/
+})();

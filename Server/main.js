@@ -1,4 +1,5 @@
 const {findingNemoP} = require('./../Bots/Plaza/Plaza_script.js');
+const {sendMails} = require('./mailService.js');
 //const {findingNemoRP} = require('./../Bots/RoomPlaza/RoomPlaza_script.js');
 const {exec} = require('child_process');
 
@@ -16,7 +17,9 @@ exec(`node ./Server/server.js`, (error, stdout, stderr) => {
 
 async function runBots(){
   result = await findingNemoP('Nederland - Zuid-Holland');
-  console.log("result length: " + result.length);
+  if (result.length > 0){
+    sendMails("Found " + result.length + " new listings on Plaza");
+  }
 }
 
 setInterval(runBots, 60000);
