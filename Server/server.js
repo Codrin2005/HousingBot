@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.SERVER_PORT;
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 
