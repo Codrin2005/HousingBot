@@ -1,2 +1,1 @@
-rcodrin13@gmail.com
-vlad.anicapopa@gmail.com
+[{"email":"def","plaza":"Hague"},{"email":"def","plaza":"Hague"},{"email":"def","plaza":"Hague"}]
