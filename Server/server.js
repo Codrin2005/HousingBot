@@ -18,7 +18,7 @@ let users = [];
 app.put('/api/add-user', (req, res) => {
     const user = req.body;
     users.push(user);
-    fs.writeFile('./Server/emailList.txt', JSON.stringify(users), (err) => {
+    fs.writeFile('./Server/userList.txt', JSON.stringify(users), (err) => {
         if (err) {
             console.log('Error writing to file: ' + err);
             res.status(500).json({error: 'Could not save user'});
@@ -58,7 +58,7 @@ app.use((err, req, res, next) => {
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);
-    fs.readFile('./Server/emailList.txt', 'utf-8', (err, data) => {
+    fs.readFile('./Server/userList.txt', 'utf-8', (err, data) => {
         if (err) {
             console.error('Error reading users file:', err);
             users = [];
