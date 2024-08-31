@@ -23,4 +23,3 @@ async function runBots(){
 }
 
 setInterval(runBots, 60000);
-runBots();

@@ -1,23 +1,31 @@
+require('dotenv').config({ path: './Server/server.env' });
+
 const express = require('express');
 const app = express();
-const port = 3001;
+const port = process.env.SERVER_PORT;
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: 'null'
+}));
 
 const fs = require('fs');
 
-require('dotenv').config({ path: './Server/server.env' });
+let users = [];
 
-app.put('/api/email', (req, res) => {
-    const mail = req.body.data;
-    fs.appendFile('./Server/emailList.txt', String(mail) + '\n', (err) => {
-        if (err) throw err;
-        console.log('"' + String(mail) + '" has been written to emailList.txt');
-    });
-    res.status(200).json({ message: 'Email has been written successfully' });
+app.put('/api/add-user', (req, res) => {
+    const user = req.body;
+    users.push(user);
+    fs.writeFile('./Server/userList.txt', JSON.stringify(users), (err) => {
+        if (err) {
+            console.log('Error writing to file: ' + err);
+            res.status(500).json({error: 'Could not save user'});
+        }
+        console.log("The following user has been added to the file: \n" + JSON.stringify(user));
+    })
+    res.status(200).json({ message: 'User has been saved successfully'});
 });
 
 app.post('/api/create-stripe-payment', async (req, res) => {
@@ -43,6 +51,24 @@ app.post('/api/create-stripe-payment', async (req, res) => {
     }
 })
 
+app.use((err, req, res, next) => {
+    console.error('Global error handler:', err);
+    res.status(500).json({ error: 'An internal server error occurred' });
+});
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);
+    fs.readFile('./Server/userList.txt', 'utf-8', (err, data) => {
+        if (err) {
+            console.error('Error reading users file:', err);
+            users = [];
+        } else {
+            try {
+                users = JSON.parse(data);
+            } catch (e) {
+                console.error('Error parsing JSON:', e);
+                users = [];
+            }
+        }
+    });
 });

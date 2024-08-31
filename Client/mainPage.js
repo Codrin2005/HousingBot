@@ -1,4 +1,7 @@
 document.getElementById('submitButton').addEventListener('click', async () => {
+    /* STRIPE
+
+
     const url = 'http://localhost:3000/api/create-stripe-payment';
     const data = String(document.getElementById('email').value);
 
@@ -21,5 +24,25 @@ document.getElementById('submitButton').addEventListener('click', async () => {
         .catch(error => console.error('Error fetching payment URL:', error));
     } catch (error) {
         console.error('Error:', error);
+    }*/
+    const url = 'http://localhost:3000/api/add-user';
+    const data = {
+        email: String(document.getElementById('email').value),
+        plaza: 'Hague'
+    };
+    console.log(JSON.stringify(data));
+    try{
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        const result = await response.json();
+        console.log(result.message);
+    }
+    catch(error){
+        console.log('Error: ', error);
     }
 });
