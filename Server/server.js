@@ -19,7 +19,10 @@ app.put('/api/add-user', (req, res) => {
     const user = req.body;
     users.push(user);
     fs.writeFile('./Server/emailList.txt', JSON.stringify(users), (err) => {
-        if (err) throw err;
+        if (err) {
+            console.log('Error writing to file: ' + err);
+            res.status(500).json({error: 'Could not save user'});
+        }
         console.log("The following user has been added to the file: \n" + JSON.stringify(user));
     })
     res.status(200).json({ message: 'User has been saved successfully'});
@@ -47,6 +50,11 @@ app.post('/api/create-stripe-payment', async (req, res) => {
         res.status(500).json({error: e.message});
     }
 })
+
+app.use((err, req, res, next) => {
+    console.error('Global error handler:', err);
+    res.status(500).json({ error: 'An internal server error occurred' });
+});
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);
