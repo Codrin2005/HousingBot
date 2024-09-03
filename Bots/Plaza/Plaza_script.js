@@ -28,7 +28,7 @@ async function configChoices(driver, city) {
         );
         for (let i = 0; i < options.length; i++) {
             const span = await options[i].findElement(By.css("span"));
-            if ((await span.getText()) === city) {
+            if ((await span.getText()) == city) {
                 console.log("found it: " + (await span.getText()));
                 await options[i].click();
                 await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -86,7 +86,7 @@ async function findingDory(city, newIds, hrefs) {
     }
     catch(err){
         // File does not exist, create it
-        fs.open(filePath, "w", (err, fd) => {
+        await fs.writeFile(filePath, "", (err, fd) => {
             if (err) {
                 console.error("Error creating file:", err);
             } else {
@@ -176,6 +176,6 @@ async function findingNemoP(city) {
 module.exports = {findingNemoP};
 
 (async function testP() {
-    let result = await findingNemoP("Nederland - Zuid-Holland");
+    let result = await findingNemoP("Nederland - Limburg");
     console.log("result length: " + result.length);
 })();

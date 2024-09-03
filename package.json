@@ -1,12 +1,12 @@
 {
   "dependencies": {
-    "chromedriver": "^126.0.5",
+    "chromedriver": "^128.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "node-powershell": "^5.0.1",
     "nodemailer": "^6.9.14",
-    "selenium-webdriver": "^4.23.0",
+    "selenium-webdriver": "^4.24.0",
     "stripe": "^16.5.0"
   }
 }
