@@ -13,8 +13,6 @@ app.use(cors({
 
 const fs = require('fs');
 
-let users = [];
-
 app.put('/api/add-user', (req, res) => {
     const user = req.body;
     users.push(user);
@@ -58,17 +56,4 @@ app.use((err, req, res, next) => {
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);
-    fs.readFile('./Server/userList.txt', 'utf-8', (err, data) => {
-        if (err) {
-            console.error('Error reading users file:', err);
-            users = [];
-        } else {
-            try {
-                users = JSON.parse(data);
-            } catch (e) {
-                console.error('Error parsing JSON:', e);
-                users = [];
-            }
-        }
-    });
 });
