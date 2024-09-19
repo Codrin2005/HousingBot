@@ -46,3 +46,14 @@ document.getElementById('submitButton').addEventListener('click', async () => {
         console.log('Error: ', error);
     }
 });
+
+document.getElementById('configureLink').addEventListener('click', function() {
+    document.getElementById('mainContent').style.display = 'block';
+    document.getElementById('aboutContent').style.display = 'none';
+});
+
+document.getElementById('aboutLink').addEventListener('click', function() {
+    document.getElementById('mainContent').style.display = 'none';
+    document.getElementById('aboutContent').style.display = 'flex';
+});
+

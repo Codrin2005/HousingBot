@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Housing Bot</title>
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <!-- Link to your CSS file -->
+        <link rel="stylesheet" href="test_style.css" />
+    </head>
+    <body>
+        <!-- Navigation Widget -->
+        <div class="navbar-widget">
+            <a class="nav-link" href="#" id="aboutLink">About</a>
+            <a class="nav-link" href="#" id="configureLink">Configure your bot</a>
+        </div>
+
+        <!-- About Content (default) -->
+        <div class="centered-content" id="aboutContent">
+            <h2>What do we do?</h2>
+            <p id="aboutText">Welcome to the Housing Bot! This application helps you find housing options in various cities. Configure your bot to get started.</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container mt-5" id="mainContent" style="display: none;">
+            <div class="row content-row">
+                <div class="col-md-6 content-column">
+                    <div class="form-group">
+                        <label for="email">Enter your email address:</label>
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            name="email"
+                            placeholder="Enter email"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="plazaSelector">Choose city:</label>
+                        <select class="form-control" id="plazaSelector">
+                            <option value="Delft">Delft</option>
+                            <option value="Amsterdam">Amsterdam</option>
+                            <option value="Hague">Hague</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rpSelector">Choose city:</label>
+                        <select class="form-control" id="rpSelector">
+                            <option value="Delft">Delft</option>
+                            <option value="Amsterdam">Amsterdam</option>
+                            <option value="Hague">Hague</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="huurSelector">Choose city:</label>
+                        <select class="form-control" id="huurSelector">
+                            <option value="Delft">Delft</option>
+                            <option value="Amsterdam">Amsterdam</option>
+                            <option value="Hague">Hague</option>
+                        </select>
+                    </div>
+                    <button
+                        type="button"
+                        class="btn btn-primary margin-top-large"
+                        id="submitButton"
+                        value="Submit"
+                    >
+                        Next
+                    </button>
+                </div>
+                <div class="col-md-6 content-column">
+                    <p>Hello world</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Link to your JavaScript file -->
+        <script src="mainPage.js"></script>
+        <!-- Bootstrap JS and dependencies -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
