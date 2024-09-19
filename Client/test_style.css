@@ -48,13 +48,14 @@
     text-align: center;
     font-weight: bold;
     font-size: 1.5em;
-    margin-top: 20px; /* Adjust this value to position the title below the menu bar */
+    margin-top: 50px; /* Adjust this value to position the title below the menu bar */
 }
 .centered-content h2 {
-    margin-bottom: 20px;
+    margin-bottom: 150px;
     font-size: 2em;
 }
 .centered-content p {
+    width: 50%;
     margin-top: auto;
     margin-bottom: auto;
     font-size: 1em;
