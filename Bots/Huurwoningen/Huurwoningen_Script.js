@@ -12,7 +12,7 @@ async function acceptCookies(driver) {
         await button.click();
         return driver;
     } catch (error) {
-        console.log("error acceptCookies Funda: ", error);
+        console.log("error acceptCookies Huurwoningen: ", error);
     }
     return driver;
 }
@@ -38,8 +38,9 @@ async function getListings(driver) {
 }
 
 async function findingDory(city, hrefs) {
+    //let m = new Map();
     const fs = require("fs").promises;
-    const filePath = "./Bots/Funda/Funda_" + city + "_ids.txt";
+    const filePath = "./Bots/Huurwoningen/Huurwoningen_" + city + "_ids.txt";
     try{
         await fs.access(filePath, fs.constants.F_OK);
         console.log("File already exists.");
@@ -64,6 +65,13 @@ async function findingDory(city, hrefs) {
     try{
         const data = await fs.readFile(filePath, "utf8");
         oldHrefs = data.split(/\s+/);
+        //console.log(oldHrefs.length);
+        // for(s in oldHrefs){
+        //     if (m.get(s) == null)
+        //         m.set(s, 0);
+        //     else
+        //         console.log("duplicate");
+        // }
         //console.log("Had " + oldHrefs.length + " listings from previous search:\n" + oldHrefs);
     }
     catch(err){
@@ -93,7 +101,7 @@ async function findingDory(city, hrefs) {
     return newListings;
 }
 
-async function findingNemoFunda(city) {
+async function findingNemoHuurwoningen(city) {
     const url =
         "https://www.huurwoningen.com/in/" + city;
     let driver;
@@ -152,16 +160,16 @@ async function findingNemoFunda(city) {
 
         return findingDory(city, hrefs);
     } catch (error) {
-        console.error("Error findingNemoFunda Funda:", error);
+        console.error("Error findingNemoHuurwoningen Huurwoningen:", error);
     } finally {
         if (driver) {
             await driver.quit();
         }
     }
 }
-module.exports = {findingNemoFunda};
+module.exports = {findingNemoHuurwoningen};
 
 (async function testP() {
-    let result = await findingNemoFunda("den-haag");
+    let result = await findingNemoHuurwoningen("den-haag");
     console.log("new listings: " + result.length);
 })();
