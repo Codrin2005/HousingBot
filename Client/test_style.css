@@ -8,9 +8,14 @@
     width: fit-content;
 }
 .navbar-widget a {
+    border-radius: 15px;
     margin: 0 10px;
     font-weight: bold;
     font-size: 1.2em;
+}
+.navbar-widget a.active {
+    color: #f8f9fa; /* Inverted text color */
+    background-color: #007BFF; /* Inverted background color */
 }
 .form-container {
     max-width: 300px; /* Adjust the width as needed */
@@ -19,27 +24,56 @@
 .content-row {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin-top: 50px;
 }
 .content-column {
     flex: 1;
     padding: 20px;
 }
+#email-div{
+    margin-bottom: 50px;
+}
 .form-group label {
     font-weight: bold;
     font-size: 1.1em;
+    text-align: left;
 }
 .form-control {
     font-size: 1.1em;
+    border-radius: 5px;
+    width: calc(75% - 60px);
+    display: flex;
 }
 .btn-primary {
     font-size: 1.1em;
-    padding: 10px 20px;
+    font-weight: bold;
+    padding: 10px 50px;
+    margin-top: 50px;
+    border-radius: 15px;
+}
+.btn-secondary {
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 10px 50px;
+    border-radius: 15px;
+    background-color: #007BFF;
+    width: 60px; /* Set the desired width */
+    text-align: center; /* Center the text horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+    background-color: #0069d9;
+    border-color: #0069d9;
 }
 .content-column p {
     font-weight: bold;
     font-size: 1.5em;
+    margin-bottom: 50px;
 }
 .centered-content {
     display: flex;
@@ -48,11 +82,12 @@
     text-align: center;
     font-weight: bold;
     font-size: 1.5em;
-    margin-top: 50px; /* Adjust this value to position the title below the menu bar */
+    margin: 50px; /* Adjust this value to position the title below the menu bar */
 }
-.centered-content h2 {
-    margin-bottom: 150px;
-    font-size: 2em;
+.centered-content h3 {
+    margin-bottom: 50px;
+    margin-top: 50px;
+    font-size: 1.5em;
 }
 .centered-content p {
     width: 50%;
@@ -60,3 +95,35 @@
     margin-bottom: auto;
     font-size: 1em;
 }
+
+.logo-img {
+    margin: 0 auto 10px; /* Center the image and add some space below it */
+    max-width: 100%; /* Ensure the image is responsive */
+    height: 50px; /* Maintain aspect ratio */
+}
+#email{
+    width: calc(75% - 60px);
+    margin-right: 10px;
+}
+.email-check{
+    display: flex;
+    align-items: center;
+}
+.submition-form{
+    align-items: center;
+    margin: 30px;
+    display:flex;
+    justify-content: center;
+    font-size: 1.1em;
+}
+#suggestion-form {
+    width: 75%;
+    height: 100px;
+    resize: vertical; /* Allow vertical resizing */
+    padding: 10px; /* Add padding for better readability */
+    font-size: 1.1em;
+    border-radius: 5px;
+    border: 1px solid #ced4da; /* Add a border */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Add an inset shadow */
+}
+

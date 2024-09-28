@@ -57,3 +57,14 @@ document.getElementById('aboutLink').addEventListener('click', function() {
     document.getElementById('aboutContent').style.display = 'flex';
 });
 
+document.querySelectorAll('.navbar-widget a').forEach(link => {
+    link.addEventListener('click', function() {
+        document.querySelector('.navbar-widget a.active')?.classList.remove('active');
+        this.classList.add('active');
+    });
+});
+
+window.onload = function() {
+    document.getElementById('aboutLink').classList.add('active');
+};
+
